@@ -103,9 +103,9 @@
           <div class="flex-1 border-t border-slate-700/60"></div>
         </div>
 
-        <!-- Teclado de PIN alternativo -->
+        <!-- Teclado de PIN alternativo sin sugerencias de contraseña del navegador -->
         <div class="flex justify-center">
-          <input type="password" id="pinInput" maxlength="4" inputmode="numeric"
+          <input type="password" id="pinInput" maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off" name="hub_auth_pin"
             class="pin-input w-44 text-center tracking-[0.5em] text-2xl font-bold bg-slate-800/90 border border-slate-700/80 rounded-2xl py-2.5 text-white focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 shadow-inner"
             placeholder="••••" onkeyup="checkPinAuto(this.value)">
         </div>
@@ -199,63 +199,90 @@
       }
     }
 
-    // Biometría nativa WebAuthn (Huella / Rostro / Patrón de pantalla del celu)
+    // Biometría nativa WebAuthn (Huella / Rostro / Patrón de pantalla)
     async function authenticateWithBiometrics() {
-      const statusEl = document.getElementById('bioStatus');
-      
-      // Comprobar si el navegador y el dispositivo soportan biometría de pantalla
-      if (window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable) {
-        try {
-          const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
-          if (!available) {
-            fallbackBiometricPrompt();
-            return;
+      const bioBtn = document.getElementById('bioBtn');
+      const errEl = document.getElementById('pinError');
+      errEl.classList.add('hidden');
+
+      if (!window.PublicKeyCredential) {
+        showBioError("Tu navegador no soporta biometría WebAuthn. Ingresá con PIN.");
+        document.getElementById('pinInput').focus();
+        return;
+      }
+
+      try {
+        const hasCred = localStorage.getItem('hub_bio_cred_id');
+        const challenge = new Uint8Array(32);
+        window.crypto.getRandomValues(challenge);
+
+        if (hasCred) {
+          // Ya fue enrolado: Autenticar directamente con huella
+          const credIdBytes = Uint8Array.from(atob(hasCred), c => c.charCodeAt(0));
+          const assertion = await navigator.credentials.get({
+            publicKey: {
+              challenge: challenge,
+              allowCredentials: [{
+                id: credIdBytes,
+                type: 'public-key',
+                transports: ['internal']
+              }],
+              userVerification: 'required',
+              timeout: 60000
+            }
+          });
+
+          if (assertion) {
+            unlockScreen();
           }
+        } else {
+          // Primer ingreso biométrico: Enrolar la huella del teléfono
+          const userId = new Uint8Array(16);
+          window.crypto.getRandomValues(userId);
 
-          // Desafío biométrico estándar WebAuthn
-          const challenge = new Uint8Array(32);
-          window.crypto.getRandomValues(challenge);
-
-          const credential = await navigator.credentials.create({
+          const newCred = await navigator.credentials.create({
             publicKey: {
               challenge: challenge,
               rp: { name: "Command Center Juan", id: window.location.hostname },
               user: {
-                id: new Uint8Array([1, 2, 3, 4, 5]),
+                id: userId,
                 name: "juanoviedo1987",
                 displayName: "Juan Oviedo"
               },
-              pubKeyCredParams: [{ alg: -7, type: "public-key" }],
+              pubKeyCredParams: [
+                { alg: -7, type: "public-key" },  // ES256
+                { alg: -257, type: "public-key" } // RS256
+              ],
               authenticatorSelection: {
                 authenticatorAttachment: "platform",
-                userVerification: "required"
+                userVerification: "required",
+                residentKey: "preferred"
               },
               timeout: 60000
             }
           });
 
-          if (credential) {
-            localStorage.setItem('hub_bio_registered', 'true');
+          if (newCred && newCred.rawId) {
+            const b64Id = btoa(String.fromCharCode(...new Uint8Array(newCred.rawId)));
+            localStorage.setItem('hub_bio_cred_id', b64Id);
             unlockScreen();
           }
-        } catch (err) {
-          console.warn("Fallo en WebAuthn o cancelado:", err);
-          // Si el usuario cancela o da error, se permite el PIN rápido
-          document.getElementById('pinInput').focus();
         }
-      } else {
-        fallbackBiometricPrompt();
+      } catch (err) {
+        console.warn("Autenticación biométrica no completada:", err);
+        if (err.name === 'NotAllowedError') {
+          showBioError("Huella cancelada o no reconocida. Usá tu PIN.");
+        } else {
+          showBioError("Verificación biométrica: ingresá tu PIN de 4 dígitos.");
+        }
+        document.getElementById('pinInput').focus();
       }
     }
 
-    function fallbackBiometricPrompt() {
-      // Si el navegador no permite WebAuthn en GitHub Pages, auto-focus al PIN
-      const pin = prompt("Ingresá tu PIN seguro para continuar:");
-      if (pin === (HUB_DATA?.pin_hash || DEFAULT_PIN)) {
-        unlockScreen();
-      } else if (pin !== null) {
-        alert("PIN incorrecto.");
-      }
+    function showBioError(msg) {
+      const errEl = document.getElementById('pinError');
+      errEl.textContent = msg;
+      errEl.classList.remove('hidden');
     }
 
     // Auto-check PIN
