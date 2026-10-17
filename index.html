@@ -300,8 +300,11 @@
       }
     }
 
-    // Inicialización
+    // Inicialización y Registro de Service Worker para PWA
     window.addEventListener('DOMContentLoaded', () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW reg error:', err));
+      }
       loadData();
       if (sessionStorage.getItem('hub_unlocked') === 'true') {
         unlockScreen();
