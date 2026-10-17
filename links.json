@@ -1,0 +1,133 @@
+{
+  "updated_at": "2026-10-17T19:30:00Z",
+  "pin_hash": "3585",
+  "categories": [
+    {
+      "id": "nazaria",
+      "name": "Nazaria Zapatos",
+      "tag": "Retail & Locales",
+      "color": "rose",
+      "icon": "shopping-bag",
+      "items": [
+        {
+          "title": "Portal de RRHH & Personal",
+          "subtitle": "Novedades, turnos y pre-liquidación",
+          "url": "https://juanoviedo1987-droid.github.io/NAZARIA-RRHH/",
+          "icon": "users",
+          "badge": "Online"
+        },
+        {
+          "title": "Manuales y SOPs de Locales",
+          "subtitle": "Procedimientos operativos, composturas y caja",
+          "url": "https://juanoviedo1987-droid.github.io/NAZARIA-SOPs/",
+          "icon": "book-open",
+          "badge": "Online"
+        },
+        {
+          "title": "Dux Software ERP",
+          "subtitle": "Gestión contable, compras y stock",
+          "url": "https://erp.duxsoftware.com.ar",
+          "icon": "calculator",
+          "badge": "ERP"
+        },
+        {
+          "title": "Google Drive · Nazaria Master",
+          "subtitle": "Planillas diarias, DDJJ y administración",
+          "url": "https://drive.google.com/drive/u/0/my-drive",
+          "icon": "folder-closed",
+          "badge": "Drive"
+        }
+      ]
+    },
+    {
+      "id": "nexum",
+      "name": "Nexum Trade Consulting",
+      "tag": "Consultoría Comex B2B",
+      "color": "sky",
+      "icon": "globe",
+      "items": [
+        {
+          "title": "Sitio Web Institucional",
+          "subtitle": "Landing pública y servicios para PyMEs",
+          "url": "https://nexumtradeconsulting.com.ar/",
+          "icon": "external-link",
+          "badge": "Web"
+        },
+        {
+          "title": "Nexum CRM & Leads",
+          "subtitle": "Pipeline comercial y seguimiento de prospectos",
+          "url": "https://nexumtradeconsulting.com.ar/crm.html",
+          "icon": "kanban",
+          "badge": "CRM"
+        },
+        {
+          "title": "Procedimientos & Metodología",
+          "subtitle": "Fases y arquitectura de trabajo Comex",
+          "url": "https://nexumtradeconsulting.com.ar/procedimientos.html",
+          "icon": "file-text",
+          "badge": "Docs"
+        }
+      ]
+    },
+    {
+      "id": "giuseppa",
+      "name": "Giuseppa Home",
+      "tag": "E-Commerce & Deco",
+      "color": "amber",
+      "icon": "home",
+      "items": [
+        {
+          "title": "Tiendanube Admin",
+          "subtitle": "Panel de control de ventas y catálogo",
+          "url": "https://admin.tiendanube.com",
+          "icon": "store",
+          "badge": "Tienda"
+        },
+        {
+          "title": "Mercado Libre Ventas",
+          "subtitle": "Panel comercial de publicaciones y envíos",
+          "url": "https://www.mercadolibre.com.ar/resumen",
+          "icon": "package",
+          "badge": "MeLi"
+        }
+      ]
+    },
+    {
+      "id": "infra",
+      "name": "Infraestructura & Cloud",
+      "tag": "Servidores y Automatización",
+      "color": "emerald",
+      "icon": "server",
+      "items": [
+        {
+          "title": "n8n Cloud (GCP)",
+          "subtitle": "Instancia central de automatizaciones 24/7",
+          "url": "https://34-135-56-126.sslip.io",
+          "icon": "workflow",
+          "badge": "GCP Cloud"
+        },
+        {
+          "title": "Supabase Console · Nazaria",
+          "subtitle": "Base de datos y storage (hlvovocufifroigdlhmv)",
+          "url": "https://supabase.com/dashboard/project/hlvovocufifroigdlhmv",
+          "icon": "database",
+          "badge": "DB"
+        },
+        {
+          "title": "Supabase Console · Nexum",
+          "subtitle": "Base de datos del CRM (wbcfmanuhotyevquiaht)",
+          "url": "https://supabase.com/dashboard/project/wbcfmanuhotyevquiaht",
+          "icon": "database",
+          "badge": "DB"
+        },
+        {
+          "title": "GitHub Repositories",
+          "subtitle": "Control de versiones (juanoviedo1987-droid)",
+          "url": "https://github.com/juanoviedo1987-droid?tab=repositories",
+          "icon": "git-branch",
+          "badge": "GitHub"
+        }
+      ]
+    }
+  ]
+}

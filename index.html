@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Command Center · Juan Oviedo</title>
+  
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hub">
+  <meta name="theme-color" content="#020617">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338BDF8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='7' height='9' x='3' y='3' rx='1'/><rect width='7' height='5' x='14' y='3' rx='1'/><rect width='7' height='9' x='14' y='12' rx='1'/><rect width='7' height='5' x='3' y='16' rx='1'/></svg>">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Google Fonts & Tailwind CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#F0F9FF',
+              400: '#38BDF8',
+              500: '#0EA5E9',
+              600: '#0284C7',
+              900: '#0C4A6E',
+              950: '#082F49'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth touch feedback for mobile app feel */
+    .tap-bounce {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tap-bounce:active {
+      transform: scale(0.97);
+    }
+    .pin-input::-webkit-outer-spin-button,
+    .pin-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="h-full bg-slate-950 font-sans antialiased text-slate-100 flex flex-col selection:bg-sky-500/30 selection:text-sky-200">
+
+  <!-- ========================================================================= -->
+  <!-- 1. PANTALLA DE ACCESO POR PIN (PROTECCIÓN MÓVIL)                           -->
+  <!-- ========================================================================= -->
+  <div id="pinScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-md">
+    <div class="w-full max-w-xs text-center space-y-6">
+      
+      <div class="inline-flex p-3 rounded-2xl bg-sky-950/60 border border-sky-800/60 text-sky-400 shadow-lg shadow-sky-950/50">
+        <i data-lucide="shield-check" class="w-8 h-8"></i>
+      </div>
+
+      <div>
+        <h1 class="text-xl font-heading font-extrabold text-white tracking-tight">Command Center</h1>
+        <p class="text-xs text-slate-400 mt-1">Ingresá tu PIN para desbloquear tus accesos</p>
+      </div>
+
+      <div class="flex justify-center gap-3">
+        <input type="password" id="pinInput" maxlength="4" inputmode="numeric" autofocus
+          class="pin-input w-40 text-center tracking-[0.6em] text-2xl font-bold bg-slate-900 border border-slate-800 rounded-xl py-3 text-white focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 shadow-inner"
+          placeholder="••••" onkeyup="checkPinAuto(this.value)">
+      </div>
+
+      <p id="pinError" class="text-xs text-rose-400 font-medium hidden">PIN incorrecto. Reintentá.</p>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. HUB PRINCIPAL (DESBLOQUEADO)                                          -->
+  <!-- ========================================================================= -->
+  <div id="hubScreen" class="hidden min-h-full flex flex-col">
+    
+    <!-- Topbar Mobile & Desktop -->
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800/80 px-4 py-3.5 sm:px-6">
+      <div class="max-w-5xl mx-auto flex items-center justify-between">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-600 to-sky-400 flex items-center justify-center text-slate-950 shadow-md shadow-sky-500/20">
+            <i data-lucide="layout-grid" class="w-5 h-5 font-bold"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-heading font-bold text-white leading-tight">Command Center</h2>
+            <p class="text-[11px] text-slate-400">Juan Oviedo · Ecosistema de Operaciones</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="lockScreen()" title="Bloquear" class="p-2 rounded-xl text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 transition">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-8">
+      
+      <!-- Buscador Rápido -->
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input type="text" id="searchInput" oninput="filterLinks(this.value)"
+          placeholder="Buscar app, ERP, CRM, tienda o servicio..." 
+          class="w-full bg-slate-900/90 border border-slate-800/90 rounded-2xl pl-10 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition shadow-sm">
+      </div>
+
+      <!-- Contenedor dinámico de categorías -->
+      <div id="categoriesContainer" class="space-y-8">
+        <!-- Renderizado vía JavaScript desde links.json -->
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 py-4 px-4 text-center text-xs text-slate-600">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+        <span>© 2026 Juan Oviedo · Privado y Seguro</span>
+        <span id="updatedAtLabel" class="text-[11px] text-slate-500">Sincronizado vía GitHub</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Script Lógica -->
+  <script>
+    let HUB_DATA = null;
+    const DEFAULT_PIN = "3585";
+
+    // Cargar datos desde links.json
+    async function loadData() {
+      try {
+        const res = await fetch('links.json?v=' + Date.now());
+        HUB_DATA = await res.json();
+        renderHub(HUB_DATA);
+      } catch (err) {
+        console.error("Error cargando links.json:", err);
+      }
+    }
+
+    // Auto-check PIN
+    function checkPinAuto(val) {
+      if (val.length === 4) {
+        const expected = HUB_DATA?.pin_hash || DEFAULT_PIN;
+        if (val === expected) {
+          unlockScreen();
+        } else {
+          document.getElementById('pinError').classList.remove('hidden');
+          document.getElementById('pinInput').value = '';
+        }
+      }
+    }
+
+    function unlockScreen() {
+      document.getElementById('pinScreen').classList.add('hidden');
+      document.getElementById('hubScreen').classList.remove('hidden');
+      sessionStorage.setItem('hub_unlocked', 'true');
+      lucide.createIcons();
+    }
+
+    function lockScreen() {
+      sessionStorage.removeItem('hub_unlocked');
+      document.getElementById('pinScreen').classList.remove('hidden');
+      document.getElementById('hubScreen').classList.add('hidden');
+      document.getElementById('pinInput').value = '';
+      document.getElementById('pinError').classList.add('hidden');
+      document.getElementById('pinInput').focus();
+    }
+
+    // Renderizar categorías y accesos
+    function renderHub(data, filter = '') {
+      const container = document.getElementById('categoriesContainer');
+      container.innerHTML = '';
+
+      if (data.updated_at) {
+        document.getElementById('updatedAtLabel').textContent = 'Actualizado: ' + new Date(data.updated_at).toLocaleDateString('es-AR');
+      }
+
+      data.categories.forEach(cat => {
+        const filteredItems = cat.items.filter(item => {
+          if (!filter) return true;
+          const q = filter.toLowerCase();
+          return item.title.toLowerCase().includes(q) || 
+                 item.subtitle.toLowerCase().includes(q) || 
+                 cat.name.toLowerCase().includes(q);
+        });
+
+        if (filteredItems.length === 0) return;
+
+        const catBlock = document.createElement('div');
+        catBlock.className = 'space-y-3';
+
+        // Header de Categoría
+        catBlock.innerHTML = `
+          <div class="flex items-center justify-between pb-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 font-heading">${cat.name}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-slate-900 border border-slate-800 text-slate-400">${cat.tag}</span>
+            </div>
+            <span class="text-xs text-slate-600">${filteredItems.length} accesos</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="cat-grid-${cat.id}"></div>
+        `;
+
+        container.appendChild(catBlock);
+        const grid = document.getElementById(`cat-grid-${cat.id}`);
+
+        filteredItems.forEach(item => {
+          const card = document.createElement('a');
+          card.href = item.url;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+          card.className = 'tap-bounce group flex flex-col justify-between p-4 rounded-2xl bg-slate-900/70 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700/80 shadow-sm hover:shadow-md transition';
+
+          card.innerHTML = `
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-slate-800/90 group-hover:bg-sky-500/10 border border-slate-700/60 group-hover:border-sky-500/30 flex items-center justify-center text-slate-300 group-hover:text-sky-400 transition">
+                  <i data-lucide="${item.icon || 'link'}" class="w-5 h-5"></i>
+                </div>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-800/60 text-slate-400 border border-slate-700/40">${item.badge || 'Link'}</span>
+              </div>
+              <h3 class="text-sm font-heading font-bold text-white group-hover:text-sky-300 transition line-clamp-1">${item.title}</h3>
+              <p class="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">${item.subtitle}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 group-hover:text-slate-400">
+              <span>Abrir acceso</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-600 group-hover:text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+      });
+
+      lucide.createIcons();
+    }
+
+    function filterLinks(term) {
+      if (HUB_DATA) {
+        renderHub(HUB_DATA, term);
+      }
+    }
+
+    // Inicialización
+    window.addEventListener('DOMContentLoaded', () => {
+      loadData();
+      if (sessionStorage.getItem('hub_unlocked') === 'true') {
+        unlockScreen();
+      } else {
+        document.getElementById('pinInput').focus();
+      }
+    });
+  </script>
+</body>
+</html>
