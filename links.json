@@ -1,7 +1,30 @@
 {
-  "updated_at": "2026-10-17T19:30:00Z",
+  "updated_at": "2026-10-17T19:39:00Z",
   "pin_hash": "3585",
   "categories": [
+    {
+      "id": "agn",
+      "name": "Grupo AGN (Uruguay)",
+      "tag": "Aberturas & Cotizador",
+      "color": "amber",
+      "icon": "building",
+      "items": [
+        {
+          "title": "Cotizador Express AGN",
+          "subtitle": "App web de cotización de aberturas y captación",
+          "url": "https://juanoviedo1987-droid.github.io/agn-jov-cotizador/",
+          "icon": "calculator",
+          "badge": "Online"
+        },
+        {
+          "title": "Repositorio AGN en GitHub",
+          "subtitle": "Código, documentación y catálogo modular",
+          "url": "https://github.com/juanoviedo1987-droid/agn-jov-cotizador",
+          "icon": "git-branch",
+          "badge": "GitHub"
+        }
+      ]
+    },
     {
       "id": "nazaria",
       "name": "Nazaria Zapatos",
@@ -89,6 +112,22 @@
           "url": "https://www.mercadolibre.com.ar/resumen",
           "icon": "package",
           "badge": "MeLi"
+        }
+      ]
+    },
+    {
+      "id": "saldoaudit",
+      "name": "Auditorías & Mercado Libre",
+      "tag": "Recupero & Reclamos",
+      "color": "indigo",
+      "icon": "shield-alert",
+      "items": [
+        {
+          "title": "SaldoAudit (ReclaMeli)",
+          "subtitle": "Auditoría de envíos, devoluciones y recupero MeLi",
+          "url": "https://juanoviedo1987-droid.github.io/reclameli/",
+          "icon": "search",
+          "badge": "Online"
         }
       ]
     },
