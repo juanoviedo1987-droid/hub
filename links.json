@@ -4,8 +4,8 @@
   "categories": [
     {
       "id": "agn",
-      "name": "Grupo AGN (Uruguay)",
-      "tag": "Aberturas & Cotizador",
+      "name": "Grupo AGN",
+      "tag": "Aberturas & Cotizadores",
       "color": "amber",
       "icon": "building",
       "items": [
@@ -15,6 +15,13 @@
           "url": "https://juanoviedo1987-droid.github.io/agn-jov-cotizador/",
           "icon": "calculator",
           "badge": "Online"
+        },
+        {
+          "title": "CD Aluminio (Cotizador)",
+          "subtitle": "Prototipo Mobile-First de presupuesto express para mostrador",
+          "url": "https://juanoviedo1987-droid.github.io/agn-jov-cotizador/",
+          "icon": "layers",
+          "badge": "Montevideo"
         },
         {
           "title": "Repositorio AGN en GitHub",
