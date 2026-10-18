@@ -139,10 +139,11 @@
         </div>
 
         <div class="flex items-center gap-2">
+          <!-- Botón expandir/colapsar todos -->
           <button onclick="toggleAllAccordions()" id="toggleAllBtn" title="Expandir/Colapsar todo" 
             class="text-xs px-3 py-1.5 rounded-xl text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition flex items-center gap-1.5">
             <i data-lucide="chevrons-down-up" class="w-3.5 h-3.5 text-sky-400"></i>
-            <span class="hidden sm:inline text-[11px]">Colapsar</span>
+            <span class="hidden sm:inline text-[11px]">Expandir</span>
           </button>
           
           <button onclick="lockScreen()" title="Bloquear" 
@@ -186,7 +187,7 @@
   <script>
     let HUB_DATA = null;
     const DEFAULT_PIN = "3585";
-    let allExpanded = true;
+    let allExpanded = false;
 
     // Cargar datos desde links.json
     async function loadData() {
