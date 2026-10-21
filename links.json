@@ -124,17 +124,38 @@
     },
     {
       "id": "saldoaudit",
-      "name": "Auditorías & Mercado Libre",
-      "tag": "Recupero & Reclamos",
+      "name": "SaldoAudit",
+      "tag": "Auditoría Forense MeLi",
       "color": "indigo",
-      "icon": "shield-alert",
+      "icon": "shield-check",
       "items": [
         {
-          "title": "SaldoAudit (ReclaMeli)",
-          "subtitle": "Auditoría de envíos, devoluciones y recupero MeLi",
-          "url": "https://juanoviedo1987-droid.github.io/reclameli/",
-          "icon": "search",
-          "badge": "Online"
+          "title": "Sitio Web Oficial",
+          "subtitle": "Landing forense y captación de sellers",
+          "url": "https://saldoaudit.com.ar",
+          "icon": "globe",
+          "badge": "Web"
+        },
+        {
+          "title": "Procedimientos & SOPs",
+          "subtitle": "Manual operativo forense y matriz de reclamos",
+          "url": "https://saldoaudit.com.ar/procedimientos.html",
+          "icon": "file-text",
+          "badge": "SOPs"
+        },
+        {
+          "title": "Brand Kit & Identidad",
+          "subtitle": "Manual de marca, colores y logos SVG",
+          "url": "https://saldoaudit.com.ar/brand.html",
+          "icon": "palette",
+          "badge": "Brand"
+        },
+        {
+          "title": "Firmas de Correo Oficiales",
+          "subtitle": "Generador de firma corporativa para Gmail",
+          "url": "https://saldoaudit.com.ar/firmas-saldoaudit.html",
+          "icon": "mail",
+          "badge": "Firmas"
         }
       ]
     },
