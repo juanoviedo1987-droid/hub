@@ -77,25 +77,18 @@
       "icon": "globe",
       "items": [
         {
+          "title": "NEXUM Suite (Portal de Apps)",
+          "subtitle": "Command Center: SOP, CRM, Diagnóstico IA, Cotizador & Pitch",
+          "url": "https://nexumtradeconsulting.com.ar/app.html",
+          "icon": "layout-grid",
+          "badge": "Suite"
+        },
+        {
           "title": "Sitio Web Institucional",
           "subtitle": "Landing pública y servicios para PyMEs",
           "url": "https://nexumtradeconsulting.com.ar/",
           "icon": "external-link",
           "badge": "Web"
-        },
-        {
-          "title": "Nexum CRM & Leads",
-          "subtitle": "Pipeline comercial y seguimiento de prospectos",
-          "url": "https://nexumtradeconsulting.com.ar/crm.html",
-          "icon": "kanban",
-          "badge": "CRM"
-        },
-        {
-          "title": "Procedimientos & Metodología",
-          "subtitle": "Fases y arquitectura de trabajo Comex",
-          "url": "https://nexumtradeconsulting.com.ar/procedimientos.html",
-          "icon": "file-text",
-          "badge": "Docs"
         }
       ]
     },
