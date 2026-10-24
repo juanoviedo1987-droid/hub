@@ -42,14 +42,14 @@
         {
           "title": "Portal de RRHH & Personal",
           "subtitle": "Novedades, turnos y pre-liquidación",
-          "url": "https://juanoviedo1987-droid.github.io/NAZARIA-RRHH/",
+          "url": "https://rrhh-nazaria.vercel.app",
           "icon": "users",
           "badge": "Online"
         },
         {
           "title": "Manuales y SOPs de Locales",
           "subtitle": "Procedimientos operativos, composturas y caja",
-          "url": "https://juanoviedo1987-droid.github.io/NAZARIA-SOPs/",
+          "url": "https://sops-nazaria.vercel.app",
           "icon": "book-open",
           "badge": "Online"
         },
