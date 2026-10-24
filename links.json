@@ -55,10 +55,17 @@
         },
         {
           "title": "Ruleta de Premios (Vidriera)",
-          "subtitle": "Web App interactiva de beneficios para clientes en tienda",
-          "url": "https://juanoviedo1987-droid.github.io/NAZARIA-SOPs/ruleta/",
+          "subtitle": "Web App oficial en Vercel para clientes en TOM y Maschwitz",
+          "url": "https://premios-nazaria.vercel.app",
           "icon": "gift",
-          "badge": "App"
+          "badge": "Online"
+        },
+        {
+          "title": "Cartel de Vidriera (Ruleta A4)",
+          "subtitle": "Afiche imprimible con QR oficial para portagráficas de acrílico",
+          "url": "https://premios-nazaria.vercel.app/afiche_vidriera.html",
+          "icon": "printer",
+          "badge": "A4 Print"
         },
         {
           "title": "Dux Software ERP",
