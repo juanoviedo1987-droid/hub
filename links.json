@@ -54,6 +54,13 @@
           "badge": "Online"
         },
         {
+          "title": "Ruleta de Premios (Vidriera)",
+          "subtitle": "Web App interactiva de beneficios para clientes en tienda",
+          "url": "https://juanoviedo1987-droid.github.io/NAZARIA-SOPs/ruleta/",
+          "icon": "gift",
+          "badge": "App"
+        },
+        {
           "title": "Dux Software ERP",
           "subtitle": "Gestión contable, compras y stock",
           "url": "https://erp.duxsoftware.com.ar",
