@@ -54,6 +54,13 @@
           "badge": "Online"
         },
         {
+          "title": "Validador de Cupones en Caja",
+          "subtitle": "Herramienta rápida para cajeras: chequeo y quema en 1 clic (TOM & Maschwitz)",
+          "url": "https://sops-nazaria.vercel.app/validador.html",
+          "icon": "check-circle",
+          "badge": "Caja"
+        },
+        {
           "title": "Ruleta de Premios (Vidriera)",
           "subtitle": "Web App oficial en Vercel para clientes en TOM y Maschwitz",
           "url": "https://premios-nazaria.vercel.app",
